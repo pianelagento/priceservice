@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: price-service
+  r2dbc:
+    url: r2dbc:h2:mem:///pricesdb;DB_CLOSE_DELAY=-1;MODE=LEGACY
+    username: sa
+    password:
+  main:
+    web-application-type: reactive
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

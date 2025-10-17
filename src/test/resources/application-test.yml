@@ -1,0 +1,7 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem:///pricesdbtest;DB_CLOSE_DELAY=-1;MODE=LEGACY
+    username: sa
+    password:
+  main:
+    web-application-type: reactive
