@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # necesario para un análisis completo de SonarCloud
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -21,17 +21,14 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Build & Test
-        run: mvn -B -DskipITs=false verify
-
-      - name: SonarCloud Scan
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: SonarSource/sonarcloud-github-action@v2
+      # 🔹 Ejecuta build, tests y análisis SonarCloud en un solo paso
+      - name: Build, Test & SonarCloud Analysis
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 🔹 necesario
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # 🔹 tu token de SonarCloud
-        with:
-          args: >
-            -Dsonar.projectKey=pianelagento_priceservice
-            -Dsonar.organization=pianelagento
-            -Dsonar.java.binaries=**/target/classes
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN:  ${{ secrets.SONAR_TOKEN }}
+        run: >
+          mvn -B verify
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.projectKey=pianelagento_priceservice
+          -Dsonar.organization=pianelagento
+          -Dsonar.host.url=https://sonarcloud.io
