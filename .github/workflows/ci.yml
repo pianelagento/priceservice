@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # necesario para un análisis completo de SonarCloud
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -28,9 +28,10 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: SonarSource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 🔹 necesario
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    # 🔹 tu token de SonarCloud
         with:
           args: >
-            -Dsonar.projectKey=pianelagento_price-service
+            -Dsonar.projectKey=pianelagento_priceservice
             -Dsonar.organization=pianelagento
             -Dsonar.java.binaries=**/target/classes
