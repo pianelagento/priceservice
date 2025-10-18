@@ -2,7 +2,6 @@ package com.example.priceservice.infrastructure.persistence.repository;
 
 import com.example.priceservice.domain.model.Price;
 import com.example.priceservice.domain.repository.PricePort;
-import com.example.priceservice.domain.repository.PriceReactiveRepository;
 import com.example.priceservice.infrastructure.persistence.mapper.PriceMapper;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

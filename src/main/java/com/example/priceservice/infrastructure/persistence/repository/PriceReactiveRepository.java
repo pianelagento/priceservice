@@ -1,14 +1,12 @@
-package com.example.priceservice.domain.repository;
+package com.example.priceservice.infrastructure.persistence.repository;
 
-import com.example.priceservice.domain.model.Price;
-import com.example.priceservice.domain.repository.PricePort;
 import com.example.priceservice.infrastructure.persistence.entity.PriceEntity;
-import com.example.priceservice.infrastructure.persistence.mapper.PriceMapper;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+
 public interface PriceReactiveRepository extends ReactiveCrudRepository<PriceEntity, Long> {
 
     @Query("""

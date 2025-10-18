@@ -2,6 +2,7 @@ package com.example.priceservice.infrastructure.web;
 
 import com.example.priceservice.application.GetApplicablePriceUseCase;
 import com.example.priceservice.infrastructure.web.dto.PriceResponseDto;
+import com.example.priceservice.shared.error.PriceNotFoundException;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class PriceController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate
     ) {
         return useCase.execute(brandId, productId, applicationDate)
+                .switchIfEmpty(Mono.error(new PriceNotFoundException(brandId, productId, applicationDate.toString())))
                 .map(p -> new PriceResponseDto(
                         p.productId(),
                         p.brandId(),

@@ -28,9 +28,9 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: SonarSource/sonarcloud-github-action@v2
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=YOUR_ORG_price-service
-            -Dsonar.organization=YOUR_ORG
+            -Dsonar.projectKey=pianelagento_price-service
+            -Dsonar.organization=pianelagento
             -Dsonar.java.binaries=**/target/classes
