@@ -21,7 +21,7 @@ jobs:
           java-version: 17
           cache: maven
 
-      # 🔹 Ejecuta build, tests y análisis SonarCloud en un solo paso
+
       - name: Build, Test & SonarCloud Analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
